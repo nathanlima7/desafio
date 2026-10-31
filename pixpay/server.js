@@ -7,8 +7,8 @@ const app = express();
 const PORT = process.env.PORT || 3002;
 
 // URLs dos outros sistemas
-const LOJA_URL  = process.env.LOJA_URL  || 'http://localhost:3001';
-const BANCO_URL = process.env.BANCO_URL || 'http://localhost:3003';
+const LOJA_URL  = process.env.LOJA_URL  || 'https://loja-5ode.onrender.com';
+const BANCO_URL = process.env.BANCO_URL || 'https://banco-klg4.onrender.com';
 
 // Segredo compartilhado com a Loja para assinar o webhook.
 // Em produção, isso viria de variável de ambiente e seria rotacionado.
