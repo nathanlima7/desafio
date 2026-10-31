@@ -65,20 +65,21 @@ function startScanner() {
   scanner.start(
     { facingMode: 'environment' },
     { fps: 10, qrbox: 250 },
-    async (decodedText) => {
+        async (decodedText) => {
       msg.className = 'scanner-message';
       msg.textContent = 'QR lido! Redirecionando...';
       await scanner.stop();
 
-      // Extrai o valor exato do QR usando o padrão EMV
-      let amount = 0;
-      const amountIndex = decodedText.indexOf('54');
-      if (amountIndex !== -1) {
-        const lengthStr = decodedText.substring(amountIndex + 2, amountIndex + 4);
-        const length = parseInt(lengthStr, 10);
-        const amountStr = decodedText.substring(amountIndex + 4, amountIndex + 4 + length);
-        amount = parseFloat(amountStr);
-      }
+      // Extrai o valor exato do QR (CORRIGIDO)
+      const amountMatch = decodedText.match(/54\d{2}([0-9.]+)/);
+      const amount = amountMatch ? parseFloat(amountMatch[1]) : 0;
+
+      // Salva o QR e o valor no sessionStorage para usar na próxima tela
+      sessionStorage.setItem('pending_qr', decodedText);
+      sessionStorage.setItem('pending_amount', amount);
+
+      window.location.href = '/confirmar.html';
+    },
 
       // Salva o QR e o valor no sessionStorage para usar na próxima tela
       sessionStorage.setItem('pending_qr', decodedText);
