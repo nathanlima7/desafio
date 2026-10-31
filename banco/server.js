@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3003;
 
 // URL da PixPay (para validação e para avisar sobre o pagamento)
-const PIXPAY_URL = process.env.PIXPAY_URL || 'http://localhost:3002';
+const PIXPAY_URL = process.env.PIXPAY_URL || 'https://pixpay-cbt0.onrender.com';
 
 app.use(express.json());
 app.use(cookieParser());
