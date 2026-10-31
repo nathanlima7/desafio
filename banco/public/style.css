@@ -1,0 +1,375 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #f4f7f6;
+  color: #333;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* ---------- Topbar Azul Escuro ---------- */
+.topbar {
+  background-color: #0b2e59;
+  color: #fff;
+  padding: 40px 20px 60px 20px; /* Espaço extra embaixo para o card flutuar */
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  position: relative;
+}
+
+.topbar .header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.topbar .logo {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.topbar .user-icon {
+  width: 36px;
+  height: 36px;
+  background: #1d4b8a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.topbar .welcome-text {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ---------- Card de Saldo Flutuante ---------- */
+.balance-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  margin: -40px 20px 0 20px; /* Puxa o card para cima */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 10;
+  text-align: center;
+}
+
+.balance-card .balance-label {
+  font-size: 13px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.balance-card .balance-value {
+  font-size: 36px;
+  font-weight: 800;
+  color: #0b2e59;
+}
+
+/* ---------- Container de Ações ---------- */
+.container {
+  padding: 24px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.btn-pix {
+  background: #0056b3;
+  color: #fff;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
+  transition: background 0.2s;
+}
+
+.btn-pix:hover { background: #004494; }
+
+/* ---------- Extrato ---------- */
+.section-title {
+  font-size: 15px;
+  color: #0b2e59;
+  font-weight: 700;
+  margin: 24px 0 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tx-list { list-style: none; }
+
+.tx-item {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+
+.tx-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-right: 16px;
+  background: #ffebee;
+  color: #c62828;
+}
+
+.tx-icon.credit {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.tx-info {
+  flex: 1;
+}
+
+.tx-desc {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.tx-date {
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+}
+
+.tx-amount {
+  font-size: 15px;
+  font-weight: 700;
+  color: #c62828;
+}
+
+.tx-amount.credit {
+  color: #2e7d32;
+}
+
+/* ---------- Login ---------- */
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.login-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 24px;
+  max-width: 360px;
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+  text-align: center;
+}
+
+.login-box .logo-big {
+  color: #0b2e59;
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.login-box p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  background: #f9f9f9;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.login-box input:focus {
+  border-color: #0056b3;
+  background: #fff;
+}
+
+.login-box button {
+  width: 100%;
+  background: #0b2e59;
+  color: #fff;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+/* ---------- Scanner ---------- */
+#reader {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+
+.scanner-message {
+  text-align: center;
+  padding: 16px;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+.scanner-message.error { color: #c62828; font-weight: 700; }
+.scanner-message.success { color: #2e7d32; font-weight: 700; }
+
+/* ---------- Footer ---------- */
+.alert-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff3cd;
+  color: #856404;
+  padding: 10px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  border-top: 1px solid #ffeaa7;
+  z-index: 100;
+}
+
+/* ---------- Novos Cards: Ações Rápidas ---------- */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.action-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.action-card:active { transform: scale(0.95); }
+
+.action-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 8px;
+  background: #e3f2fd;
+  color: #0056b3;
+}
+
+/* Cores variadas para os ícones */
+.action-icon.green { background: #e8f5e9; color: #2e7d32; }
+.action-icon.orange { background: #fff3e0; color: #e65100; }
+.action-icon.purple { background: #f3e5f5; color: #6a1b9a; }
+.action-icon.red { background: #ffebee; color: #c62828; }
+
+.action-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* ---------- Card de Destaque (Investimentos) ---------- */
+.feature-card {
+  background: linear-gradient(135deg, #0b2e59 0%, #1d4b8a 100%);
+  color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(11, 46, 89, 0.3);
+}
+
+.feature-card .feature-text h3 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.feature-card .feature-text p {
+  font-size: 12px;
+  opacity: 0.8;
+  max-width: 180px;
+}
+
+.feature-card .feature-btn {
+  background: #fff;
+  color: #0b2e59;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ---------- Banner Promocional ---------- */
+.promo-banner {
+  background: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.promo-banner .promo-icon {
+  font-size: 24px;
+  margin-right: 16px;
+}
+
+.promo-banner .promo-text {
+  font-size: 13px;
+  color: #2e7d32;
+  font-weight: 600;
+}

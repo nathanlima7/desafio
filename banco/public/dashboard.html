@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CyberBank — Início</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="header-nav">
+    <div class="logo">CyberBank</div>
+    <div class="user-icon" id="user-initial">A</div>
+  </div>
+  <div class="welcome-text">Olá, <span id="user-name">—</span></div>
+</div>
+
+<div class="balance-card">
+  <div class="balance-label">Saldo disponível</div>
+  <div class="balance-value" id="balance">R$ —</div>
+</div>
+
+<div class="container">
+  
+  <!-- Botão Principal -->
+  <button class="btn-pix" id="btn-pay">
+    <span></span> Pagar com Pix
+  </button>
+
+  <!-- Grade de Ações Rápidas -->
+  <div class="quick-actions">
+    <div class="action-card" onclick="alert('Em breve: Área Pix')">
+      <div class="action-icon green">💸</div>
+      <div class="action-name">Área Pix</div>
+    </div>
+    <div class="action-card" onclick="alert('Em breve: Recarga')">
+      <div class="action-icon orange">📱</div>
+      <div class="action-name">Recarga</div>
+    </div>
+    <div class="action-card" onclick="alert('Em breve: Empréstimo')">
+      <div class="action-icon purple">💰</div>
+      <div class="action-name">Empréstimo</div>
+    </div>
+    <div class="action-card" onclick="alert('Em breve: Investimentos')">
+      <div class="action-icon red">📈</div>
+      <div class="action-name">Investir</div>
+    </div>
+  </div>
+
+  <!-- Card de Destaque (Investimentos) -->
+  <div class="feature-card">
+    <div class="feature-text">
+      <h3>Invista com o CyberBank</h3>
+      <p>Rendimento de 110% do CDI. Comece com R$ 10.</p>
+    </div>
+    <button class="feature-btn" onclick="alert('Em breve: Investimentos')">Conhecer</button>
+  </div>
+
+  <!-- Banner Promocional -->
+  <div class="promo-banner">
+    <div class="promo-icon"></div>
+    <div class="promo-text">
+      Indique um amigo e ganhe R$ 50 na conta!
+    </div>
+  </div>
+
+  <!-- Seção de Transações -->
+  <div class="section-title">
+    <span>Últimas Transações</span>
+    <span style="font-size:12px; color:#0056b3; cursor:pointer;" onclick="alert('Em breve: Extrato completo')">Ver todas</span>
+  </div>
+  
+  <ul class="tx-list" id="tx-list">
+    <li style="text-align:center;color:#999;padding:20px;background:#fff;border-radius:12px;">Carregando...</li>
+  </ul>
+
+  <button id="btn-logout" style="background:none;border:none;color:#c62828;margin-top:30px;font-size:14px;cursor:pointer;width:100%;font-weight:600;">
+    Sair da conta
+  </button>
+</div>
+
+<div class="alert-footer">AMBIENTE DE TREINAMENTO — NÃO USE DADOS REAIS</div>
+
+<script src="/app.js"></script>
+<script>
+  loadDashboard();
+</script>
+</body>
+</html>

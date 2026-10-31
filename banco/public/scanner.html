@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CyberBank — Escanear Pix</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+</head>
+<body>
+
+<div class="topbar" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0; padding-bottom: 20px;">
+  <div class="header-nav" style="margin-bottom: 0;">
+    <div class="logo">Pagar com Pix</div>
+  </div>
+</div>
+
+<div class="container" style="padding-top: 20px;">
+  <div style="background: #fff; border-radius: 16px; padding: 10px; box-shadow: 0 4px 12px rgba(0,0,0,.08);">
+    <div id="reader"></div>
+  </div>
+  
+  <div id="message" class="scanner-message" style="margin-top: 16px;">Iniciando câmera...</div>
+  
+  <button id="btn-cancel" style="background:none;border:1px solid #c62828;color:#c62828;margin-top:24px;font-size:15px;cursor:pointer;width:100%;padding:14px;border-radius:12px;font-weight:700;">
+    Cancelar
+  </button>
+</div>
+
+<div class="alert-footer">AMBIENTE DE TREINAMENTO — NÃO USE DADOS REAIS</div>
+
+<script src="/app.js"></script>
+<script>
+  startScanner();
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": "b1",
+      "email": "aluno@techparts.local",
+      "password": "senha123",
+      "name": "Aluno CTF",
+      "balance": 5000.00
+    }
+  ],
+  "transactions": []
+}

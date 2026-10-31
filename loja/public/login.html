@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>TechParts Brasil — Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">Tech<span>Parts</span> Brasil</div>
+  <nav>
+    <a href="index.html">Catálogo</a>
+    <a href="cart.html">Carrinho</a>
+  </nav>
+</header>
+
+<div class="banner">🔥 PROMOÇÃO! Placa de vídeo com 30% OFF à vista no PIX 🔥</div>
+
+<div class="form-box">
+  <h2>Entrar na sua conta</h2>
+  <div id="error" class="error" style="display:none"></div>
+  <form id="login-form">
+    <input type="email" id="email" placeholder="E-mail" required value="aluno@techparts.local">
+    <input type="password" id="password" placeholder="Senha" required value="senha123">
+    <button type="submit">Entrar</button>
+  </form>
+</div>
+
+<footer>
+  <div class="alert">AMBIENTE DE TREINAMENTO — NÃO USE DADOS REAIS</div>
+  <div>© TechParts Brasil — Sistemas e Periféricos desde 2003</div>
+</footer>
+
+<script>
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const err = document.getElementById('error');
+  err.style.display = 'none';
+
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  const resp = await fetch('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  });
+
+  if (!resp.ok) {
+    const data = await resp.json();
+    err.textContent = data.error || 'Falha no login';
+    err.style.display = 'block';
+    return;
+  }
+
+  window.location.href = 'index.html';
+});
+</script>
+</body>
+</html>

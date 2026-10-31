@@ -1,0 +1,285 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "email": "aluno@techparts.local",
+      "password": "senha123",
+      "name": "Aluno CTF"
+    }
+  ],
+  "products": [
+    {
+      "id": "p1",
+      "name": "Placa de Vídeo RTX 4060",
+      "description": "8GB GDDR6, Ray Tracing, DLSS 3",
+      "price": 2499,
+      "image": "🎮",
+      "stock": 5
+    },
+    {
+      "id": "p2",
+      "name": "SSD NVMe 1TB",
+      "description": "Leitura 3500MB/s, PCIe 4.0",
+      "price": 449,
+      "image": "💾",
+      "stock": 12
+    },
+    {
+      "id": "p3",
+      "name": "Memória RAM 16GB DDR5",
+      "description": "5600MHz, CL36, RGB",
+      "price": 389,
+      "image": "🧠",
+      "stock": 8
+    },
+    {
+      "id": "p4",
+      "name": "Processador Ryzen 5 7600",
+      "description": "6 núcleos, 12 threads, 5.1GHz",
+      "price": 1299,
+      "image": "⚙️",
+      "stock": 4
+    },
+    {
+      "id": "p5",
+      "name": "Fonte 750W 80+ Gold",
+      "description": "Modular, PFC ativo",
+      "price": 549,
+      "image": "🔌",
+      "stock": 6
+    },
+    {
+      "id": "p6",
+      "name": "Gabinete Gamer RGB",
+      "description": "Mid Tower, vidro temperado",
+      "price": 299,
+      "image": "🖥️",
+      "stock": 10
+    },
+    {
+      "id": "p7",
+      "name": "Kit Teclado + Mouse Mecânico",
+      "description": "Switch blue, RGB, ABNT2",
+      "price": 349,
+      "image": "⌨️",
+      "stock": 15
+    },
+    {
+      "id": "p8",
+      "name": "Monitor 144Hz 24\"",
+      "description": "IPS, 1ms, FreeSync",
+      "price": 1199,
+      "image": "🖥️",
+      "stock": 3
+    }
+  ],
+  "carts": {
+    "u1": []
+  },
+  "orders": [
+    {
+      "id": "of2956409",
+      "userId": "u1",
+      "items": [
+        {
+          "productId": "p3",
+          "name": "Memória RAM 16GB DDR5",
+          "price": 389,
+          "qty": 1
+        },
+        {
+          "productId": "p1",
+          "name": "Placa de Vídeo RTX 4060",
+          "price": 2499,
+          "qty": 1
+        }
+      ],
+      "total": 2888,
+      "status": "pending",
+      "createdAt": "2026-10-31T12:32:04.187Z"
+    },
+    {
+      "id": "oa0e0a63d",
+      "userId": "u1",
+      "items": [
+        {
+          "productId": "p4",
+          "name": "Processador Ryzen 5 7600",
+          "price": 1299,
+          "qty": 1
+        }
+      ],
+      "total": 1299,
+      "status": "pending",
+      "createdAt": "2026-10-31T12:48:53.418Z"
+    },
+    {
+      "id": "o2737e2bc",
+      "userId": "u1",
+      "items": [
+        {
+          "productId": "p4",
+          "name": "Processador Ryzen 5 7600",
+          "price": 1299,
+          "qty": 1
+        },
+        {
+          "productId": "p3",
+          "name": "Memória RAM 16GB DDR5",
+          "price": 389,
+          "qty": 1
+        },
+        {
+          "productId": "p2",
+          "name": "SSD NVMe 1TB",
+          "price": 449,
+          "qty": 1
+        }
+      ],
+      "total": 2137,
+      "status": "pending",
+      "createdAt": "2026-10-31T12:49:07.024Z"
+    },
+    {
+      "id": "o697e0d0a",
+      "userId": "u1",
+      "items": [
+        {
+          "productId": "p3",
+          "name": "Memória RAM 16GB DDR5",
+          "price": 389,
+          "qty": 1
+        },
+        {
+          "productId": "p2",
+          "name": "SSD NVMe 1TB",
+          "price": 449,
+          "qty": 1
+        }
+      ],
+      "total": 838,
+      "status": "pending",
+      "createdAt": "2026-10-31T12:51:36.155Z"
+    },
+    {
+      "id": "oc958889b",
+      "userId": "u1",
+      "items": [
+        {
+          "productId": "p3",
+          "name": "Memória RAM 16GB DDR5",
+          "price": 389,
+          "qty": 1
+        },
+        {
+          "productId": "p2",
+          "name": "SSD NVMe 1TB",
+          "price": 449,
+          "qty": 1
+        }
+      ],
+      "total": 838,
+      "status": "pending",
+      "createdAt": "2026-10-31T12:53:25.619Z"
+    },
+    {
+      "id": "o47de6af2",
+      "userId": "u1",
+      "items": [
+        {
+          "productId": "p2",
+          "name": "SSD NVMe 1TB",
+          "price": 449,
+          "qty": 1
+        },
+        {
+          "productId": "p3",
+          "name": "Memória RAM 16GB DDR5",
+          "price": 389,
+          "qty": 1
+        },
+        {
+          "productId": "p5",
+          "name": "Fonte 750W 80+ Gold",
+          "price": 549,
+          "qty": 1
+        }
+      ],
+      "total": 1387,
+      "status": "pending",
+      "createdAt": "2026-10-31T12:54:08.499Z"
+    },
+    {
+      "id": "o659470c5",
+      "userId": "u1",
+      "items": [
+        {
+          "productId": "p3",
+          "name": "Memória RAM 16GB DDR5",
+          "price": 389,
+          "qty": 1
+        },
+        {
+          "productId": "p6",
+          "name": "Gabinete Gamer RGB",
+          "price": 299,
+          "qty": 1
+        },
+        {
+          "productId": "p5",
+          "name": "Fonte 750W 80+ Gold",
+          "price": 549,
+          "qty": 1
+        },
+        {
+          "productId": "p4",
+          "name": "Processador Ryzen 5 7600",
+          "price": 1299,
+          "qty": 1
+        },
+        {
+          "productId": "p2",
+          "name": "SSD NVMe 1TB",
+          "price": 449,
+          "qty": 2
+        },
+        {
+          "productId": "p1",
+          "name": "Placa de Vídeo RTX 4060",
+          "price": 2499,
+          "qty": 1
+        }
+      ],
+      "total": 5933,
+      "status": "pending",
+      "createdAt": "2026-10-31T12:54:41.238Z"
+    },
+    {
+      "id": "o619c9e3e",
+      "userId": "u1",
+      "items": [
+        {
+          "productId": "p2",
+          "name": "SSD NVMe 1TB",
+          "price": 449,
+          "qty": 1
+        },
+        {
+          "productId": "p1",
+          "name": "Placa de Vídeo RTX 4060",
+          "price": 2499,
+          "qty": 1
+        },
+        {
+          "productId": "p3",
+          "name": "Memória RAM 16GB DDR5",
+          "price": 389,
+          "qty": 1
+        }
+      ],
+      "total": 3337,
+      "status": "pending",
+      "createdAt": "2026-10-31T12:59:37.312Z"
+    }
+  ]
+}

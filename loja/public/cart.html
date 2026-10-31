@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>TechParts Brasil — Carrinho</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">Tech<span>Parts</span> Brasil</div>
+  <nav>
+    <a href="index.html">Catálogo</a>
+    <a href="cart.html">Carrinho</a>
+    <span id="user-area"></span>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>Seu Carrinho</h1>
+  <div id="empty" style="display:none">
+    <p>Seu carrinho está vazio. <a href="index.html">Voltar ao catálogo</a></p>
+  </div>
+  <div id="cart-content" style="display:none">
+    <table class="cart">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Preço</th>
+          <th>Qtd</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="cart-body"></tbody>
+      <tfoot>
+        <tr class="total-row">
+          <td colspan="3" style="text-align:right">Total:</td>
+          <td id="total">R$ 0,00</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+    <div style="margin-top:16px; text-align:right">
+      <button class="btn-primary" id="btn-checkout">Finalizar compra com PIX</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="alert">AMBIENTE DE TREINAMENTO — NÃO USE DADOS REAIS</div>
+  <div>© TechParts Brasil — Sistemas e Periféricos desde 2003</div>
+</footer>
+
+<div id="toast"></div>
+
+<script src="app.js"></script>
+<script>
+  renderHeader();
+  renderCart();
+</script>
+</body>
+</html>

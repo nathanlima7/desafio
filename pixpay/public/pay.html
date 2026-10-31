@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PixPay — Pagamento</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">Pix<span>Pay</span></div>
+  <div class="badge">Pagamento via PIX</div>
+</header>
+
+<main>
+  <div class="card" id="card">
+    <h1>Escaneie o QR Code</h1>
+    <div class="amount" id="amount">R$ —</div>
+    <div class="txid" id="txid">TX-...</div>
+
+    <div class="qr-box">
+      <img id="qr" alt="QR Code PIX">
+    </div>
+
+    <p style="font-size:12px;color:#666;margin-bottom:8px">
+      Ou copie o código Pix abaixo:
+    </p>
+    <div class="pix-code" id="pix-code" title="Clique para copiar">—</div>
+
+    <button class="btn-primary" id="btn-pay">Simular pagamento no app do banco</button>
+
+    <div id="status" class="status pending" style="display:none"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="alert">AMBIENTE DE TREINAMENTO — NÃO USE DADOS REAIS</div>
+  <div>© PixPay — Gateway de pagamentos fictício</div>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>

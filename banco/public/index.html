@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CyberBank — Login</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="login-wrapper">
+  <div class="login-box">
+    <div class="logo-big">CyberBank</div>
+    <p>Bem-vindo de volta</p>
+    
+    <div id="error" style="color:#c62828;font-size:13px;margin-bottom:10px;display:none;font-weight:bold;"></div>
+    
+    <form id="login-form">
+      <input type="email" id="email" placeholder="E-mail" value="aluno@techparts.local" required>
+      <input type="password" id="password" placeholder="Senha" value="senha123" required>
+      <button type="submit">Acessar Conta</button>
+    </form>
+  </div>
+</div>
+
+<div class="alert-footer">AMBIENTE DE TREINAMENTO — NÃO USE DADOS REAIS</div>
+
+<script>
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const err = document.getElementById('error');
+  err.style.display = 'none';
+
+  const resp = await fetch('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value
+    })
+  });
+
+  if (!resp.ok) {
+    err.textContent = 'Credenciais inválidas';
+    err.style.display = 'block';
+    return;
+  }
+  window.location.href = '/dashboard.html';
+});
+</script>
+</body>
+</html>
