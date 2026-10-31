@@ -7,8 +7,8 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // URLs dos outros sistemas (configuráveis via Render)
-const PIXPAY_URL = process.env.PIXPAY_URL || 'http://localhost:3002';
-const BANCO_URL  = process.env.BANCO_URL  || 'http://localhost:3003';
+const PIXPAY_URL = process.env.PIXPAY_URL || 'https://pixpay-cbt0.onrender.com';
+const BANCO_URL  = process.env.BANCO_URL  || 'https://banco-klg4.onrender.com';
 
 app.use(express.json());
 app.use(cookieParser());
