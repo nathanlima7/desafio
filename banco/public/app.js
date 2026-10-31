@@ -13,7 +13,8 @@ async function loadDashboard() {
   
   // Preenche nome e inicial
   document.getElementById('user-name').textContent = me.name;
-  document.getElementById('user-initial').textContent = me.name.charAt(0).toUpperCase();
+  const initialEl = document.getElementById('user-initial');
+  if (initialEl) initialEl.textContent = me.name.charAt(0).toUpperCase();
 
   // Saldo
   const { balance } = await fetch('/api/balance').then(r => r.json());
@@ -56,7 +57,7 @@ async function loadDashboard() {
   });
 }
 
-// ---------- scanner (mantido igual) ----------
+// ---------- scanner ----------
 function startScanner() {
   const msg = document.getElementById('message');
 
@@ -66,31 +67,24 @@ function startScanner() {
     { fps: 10, qrbox: 250 },
     async (decodedText) => {
       msg.className = 'scanner-message';
-      msg.textContent = 'QR lido! Processando pagamento...';
+      msg.textContent = 'QR lido! Redirecionando...';
       await scanner.stop();
 
-      try {
-        const resp = await fetch('/api/pay-qr', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ qrPayload: decodedText })
-        });
-        const data = await resp.json();
-
-        if (!resp.ok) {
-          msg.className = 'scanner-message error';
-          msg.textContent = '❌ ' + (data.error || 'Falha no pagamento');
-          setTimeout(() => window.location.href = '/dashboard.html', 3000);
-          return;
-        }
-
-        msg.className = 'scanner-message success';
-        msg.textContent = `✅ Pago: ${money(data.amount)}. Novo saldo: ${money(data.newBalance)}`;
-        setTimeout(() => window.location.href = '/dashboard.html', 2000);
-      } catch (err) {
-        msg.className = 'scanner-message error';
-        msg.textContent = '❌ Erro de rede';
+      // Extrai o valor exato do QR usando o padrão EMV
+      let amount = 0;
+      const amountIndex = decodedText.indexOf('54');
+      if (amountIndex !== -1) {
+        const lengthStr = decodedText.substring(amountIndex + 2, amountIndex + 4);
+        const length = parseInt(lengthStr, 10);
+        const amountStr = decodedText.substring(amountIndex + 4, amountIndex + 4 + length);
+        amount = parseFloat(amountStr);
       }
+
+      // Salva o QR e o valor no sessionStorage para usar na próxima tela
+      sessionStorage.setItem('pending_qr', decodedText);
+      sessionStorage.setItem('pending_amount', amount);
+
+      window.location.href = '/confirmar.html';
     },
     (error) => { /* ignora frames sem QR */ }
   ).catch(err => {
@@ -100,6 +94,69 @@ function startScanner() {
 
   document.getElementById('btn-cancel').addEventListener('click', async () => {
     await scanner.stop();
+    window.location.href = '/dashboard.html';
+  });
+}
+
+// ---------- Tela de Confirmação ----------
+function setupConfirmScreen() {
+  const qrPayload = sessionStorage.getItem('pending_qr');
+  const amount = sessionStorage.getItem('pending_amount');
+
+  if (!qrPayload || !amount) {
+    window.location.href = '/dashboard.html';
+    return;
+  }
+
+  document.getElementById('valor').textContent = money(amount);
+
+  document.getElementById('confirm-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const err = document.getElementById('error');
+    const btn = e.target.querySelector('button');
+    err.style.display = 'none';
+
+    btn.disabled = true;
+    btn.textContent = 'Processando...';
+
+    try {
+      const resp = await fetch('/api/pay-qr', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          qrPayload: qrPayload,
+          password: document.getElementById('password').value
+        })
+      });
+      
+      const data = await resp.json();
+
+      if (!resp.ok) {
+        err.textContent = data.error || 'Falha no pagamento';
+        err.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Confirmar Pagamento';
+        return;
+      }
+
+      // Limpa a memória e volta pro dashboard
+      sessionStorage.removeItem('pending_qr');
+      sessionStorage.removeItem('pending_amount');
+      
+      alert(`✅ Pagamento de ${money(data.amount)} aprovado!\nNovo saldo: ${money(data.newBalance)}`);
+      window.location.href = '/dashboard.html';
+      
+    } catch (err) {
+      err.textContent = 'Erro de rede';
+      err.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Confirmar Pagamento';
+    }
+  });
+
+  document.getElementById('btn-cancel').addEventListener('click', () => {
+    sessionStorage.removeItem('pending_qr');
+    sessionStorage.removeItem('pending_amount');
     window.location.href = '/dashboard.html';
   });
 }
