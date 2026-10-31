@@ -78,21 +78,20 @@ app.post('/api/pay-qr', requireAuth, async (req, res) => {
   }
 
   // Extrai txid do payload EMV fictício
+    // Extrai txid do payload EMV fictício
   const txidMatch = qrPayload.match(/0136(TX-[a-f0-9]{8})/);
   if (!txidMatch) {
     return res.status(400).json({ error: 'QR Code inválido ou não reconhecido' });
   }
   const txid = txidMatch[1];
 
-  // Extrai o valor exato do payload EMV (usando o tamanho indicado)
-  let amount = 0;
-  const amountIndex = qrPayload.indexOf('54');
-  if (amountIndex !== -1) {
-    const lengthStr = qrPayload.substring(amountIndex + 2, amountIndex + 4);
-    const length = parseInt(lengthStr, 10);
-    const amountStr = qrPayload.substring(amountIndex + 4, amountIndex + 4 + length);
-    amount = parseFloat(amountStr);
+  // Extrai o valor exato do payload EMV (CORRIGIDO)
+  // O padrão é: 54 + 2 dígitos de tamanho + o valor numérico
+  const amountMatch = qrPayload.match(/54\d{2}([0-9.]+)/);
+  if (!amountMatch) {
+    return res.status(400).json({ error: 'Valor não encontrado no QR Code' });
   }
+  const amount = parseFloat(amountMatch[1]);
 
   // Consulta a PixPay para confirmar se a transação existe e está pendente
   try {
