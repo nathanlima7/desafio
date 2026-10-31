@@ -1,1 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CyberBank — Confirmar Pix</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
 
+<div class="topbar" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0; padding-bottom: 20px;">
+  <div class="header-nav" style="margin-bottom: 0;">
+    <div class="logo">Confirmar Pix</div>
+  </div>
+</div>
+
+<div class="container" style="padding-top: 20px;">
+  <div class="login-box" style="margin-top: 0;">
+    <div class="logo-big" style="font-size: 20px; color: #666;">Valor a pagar</div>
+    <div style="font-size: 36px; font-weight: 800; color: #0b2e59; margin: 10px 0 24px;" id="valor">R$ —</div>
+    
+    <div id="error" style="color:#c62828;font-size:13px;margin-bottom:10px;display:none;font-weight:bold;"></div>
+    
+    <p style="font-size: 13px; color: #666; margin-bottom: 16px;">Digite sua senha para autorizar a transferência</p>
+    <form id="confirm-form">
+      <input type="password" id="password" placeholder="Sua senha do banco" required>
+      <button type="submit" style="background: #2e7d32;">Confirmar Pagamento</button>
+    </form>
+  </div>
+  
+  <button id="btn-cancel" style="background:none;border:none;color:#c62828;margin-top:16px;font-size:14px;cursor:pointer;width:100%;font-weight:600;">Cancelar</button>
+</div>
+
+<div class="alert-footer">AMBIENTE DE TREINAMENTO — NÃO USE DADOS REAIS</div>
+
+<script src="/app.js"></script>
+<script>
+  setupConfirmScreen();
+</script>
+</body>
+</html>
