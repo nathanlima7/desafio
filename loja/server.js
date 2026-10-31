@@ -141,7 +141,7 @@ app.post('/api/checkout', requireAuth, async (req, res) => {
       body: JSON.stringify({
         orderId,
         amount: total,
-        returnUrl: `http://localhost:${PORT}/pedido.html?order=${orderId}`
+        returnUrl: `https://loja-5ode.onrender.com/pedido.html?order=${orderId}`
       })
     });
     const pixpayData = await resp.json();
