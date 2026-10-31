@@ -67,52 +67,65 @@ app.get('/api/transactions', requireAuth, (req, res) => {
 
 // ---------- pagar QR (chamado pelo app do banco quando escaneia) ----------
 app.post('/api/pay-qr', requireAuth, async (req, res) => {
-  const { qrPayload } = req.body;
+  const { qrPayload, password } = req.body;
+  
   if (!qrPayload) return res.status(400).json({ error: 'qrPayload é obrigatório' });
+  if (!password) return res.status(400).json({ error: 'Senha é obrigatória para confirmar' });
 
-  // Extrai txid e amount do payload EMV fictício
-  // Formato: ...0136TX-xxxxxxxx...54XX<amount>...
-  const txidMatch = qrPayload.match(/0136(TX-[a-f0-9]{8})/);
-  const amountMatch = qrPayload.match(/54(\d{2})([\d.]+)/);
-
-  if (!txidMatch || !amountMatch) {
-    return res.status(400).json({ error: 'QR Code inválido ou não reconhecido' });
+  // Valida a senha do usuário
+  if (password !== req.user.password) {
+    return res.status(401).json({ error: 'Senha incorreta' });
   }
 
+  // Extrai txid do payload EMV fictício
+  const txidMatch = qrPayload.match(/0136(TX-[a-f0-9]{8})/);
+  if (!txidMatch) {
+    return res.status(400).json({ error: 'QR Code inválido ou não reconhecido' });
+  }
   const txid = txidMatch[1];
-  const amount = parseFloat(amountMatch[2]);
 
-  // ═══════════════════════════════════════════════════════════════
-  // [PROFESSOR] FALHA PLANTADA #4 — Não valida o amount do QR contra a PixPay
-  // O correto seria consultar a PixPay: GET /api/transactions/:txid
-  // e garantir que tx.amount === amount (o valor do QR).
-  // Aqui confiamos no valor que veio no QR, que o aluno pode gerar
-  // sozinho com amount = 0.01 e escanear no app.
-  // ═══════════════════════════════════════════════════════════════
+  // Extrai o valor exato do payload EMV (usando o tamanho indicado)
+  let amount = 0;
+  const amountIndex = qrPayload.indexOf('54');
+  if (amountIndex !== -1) {
+    const lengthStr = qrPayload.substring(amountIndex + 2, amountIndex + 4);
+    const length = parseInt(lengthStr, 10);
+    const amountStr = qrPayload.substring(amountIndex + 4, amountIndex + 4 + length);
+    amount = parseFloat(amountStr);
+  }
+
+  // Consulta a PixPay para confirmar se a transação existe e está pendente
   try {
-    const resp = await fetch(`${PIXPAY_URL}/api/transactions/${txid}`);
-    if (!resp.ok) {
+    const pixpayResp = await fetch(`${PIXPAY_URL}/api/transactions/${txid}`);
+    if (!pixpayResp.ok) {
       return res.status(404).json({ error: 'Cobrança não encontrada na PixPay' });
     }
-    // (A validação do amount deveria estar aqui — mas não está)
+    const txData = await pixpayResp.json();
+    
+    // ═══════════════════════════════════════════════════════════════
+    // [PROFESSOR] FALHA PLANTADA #4 — O banco deveria validar se
+    // `txData.amount` é igual ao `amount` lido do QR. Como não valida,
+    // um QR adulterado com valor menor é aceito.
+    // ═══════════════════════════════════════════════════════════════
+
+    if (txData.status === 'paid') {
+      return res.status(400).json({ error: 'Esta cobrança já foi paga' });
+    }
   } catch (err) {
     return res.status(502).json({ error: 'Falha ao consultar a PixPay' });
   }
 
   // ═══════════════════════════════════════════════════════════════
   // [PROFESSOR] FALHA PLANTADA #3 — Race condition no débito
-  // O padrão correto é uma transação atômica:
-  //   UPDATE users SET balance = balance - ? WHERE email = ? AND balance >= ?
-  // e verificar se a linha foi afetada.
-  // Aqui fazemos SELECT + write separados, o que permite
-  // duas requisições simultâneas passarem pelo `if` de saldo antes do write.
   // ═══════════════════════════════════════════════════════════════
   const db = read();
   const user = db.users.find(u => u.email === req.user.email);
   if (!user) return res.status(404).json({ error: 'Usuário não encontrado' });
+  
   if (user.balance < amount) {
     return res.status(402).json({ error: 'Saldo insuficiente' });
   }
+
   user.balance -= amount;
   db.transactions.push({
     id: 't' + crypto.randomUUID().slice(0, 8),
